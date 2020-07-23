@@ -5,6 +5,53 @@ class ListNode:
 class Solution:
   def __init__(self):
     self.head=None
+  def insert_at_beginning(self,data):
+    new_node=ListNode(data)
+    new_node.next=self.head
+    self.head=new_node
+  def insert_at_end(self,data):
+    new_node=ListNode(data)
+    if self.head is None:
+      self.head=new_node
+      return
+    n=self.head
+    while n.next:
+      n=n.next
+    n.next=new_node
+  def insert_after_x(self,x,data):
+    n=self.head
+    while n:
+      if n.val==x:
+        break
+      n=n.next
+    new_node=ListNode(data)
+    new_node.next=n.next
+    n.next=new_node
+  def insert_before_x(self,x,data):
+    n=self.head
+    while n:
+      if n.next.val==x:
+        break
+      n=n.next
+    new_node=ListNode(data)
+    new_node.next=n.next
+    n.next=new_node
+  def insert_at_index(self,i,data):
+    count=0
+    n=self.head
+    while count<i-1:
+      count+=1
+      n=n.next
+    new_node=ListNode(data)
+    new_node.next=n.next
+    n.next=new_node
+  
+
+
+
+
+
+
   def printList(self, node):
       arr=[]    
       while node:
@@ -28,6 +75,17 @@ class Solution:
       head.next=tail.next
       tail.next=None
       return tail.val
+  def remove_at_start(self):
+      self.head=self.head.next
+  def remove_at_end(self):
+      n=self.head
+      while n.next.next:
+        n=n.next
+      n.next=None
+
+
+
+
   def count(self,node):
     count=0
     while node:
@@ -75,6 +133,11 @@ class Solution:
       point.next=l1
     print(self.printList(head.next)) 
     return head.next
+  def create_LL(self):
+    nums=int(input('Number: '))
+    for i in range(nums):
+      val=int(input('Enter value: '))
+      self.insert_at_end(val)
     
 
 
@@ -115,11 +178,35 @@ s=Solution()
 s.merge(list1,lst1)
 s.printList(s.merge(list1,lst1))
 
-# node_start=ListNode()
-# LL=Solution()
-# LL.insert(1,node_start)
-# LL.insert(2,node_start)
-# LL.insert(3,node_start)
-# LL.insert(4,node_start)
-# LL.insert(5,node_start)
-# print(LL.printList(node_start))
+m=Solution()
+arr=[1,2,3,4,5]
+for i in arr:
+  m.insert_at_beginning(i)
+print(m.printList(m.head))
+
+
+for i in arr:
+  m.insert_at_end(i)
+print(m.printList(m.head))
+
+x=4
+m.insert_after_x( x,6)
+print(m.printList(m.head))
+
+x=6
+m.insert_before_x(x,7)
+print(m.printList(m.head))
+
+
+i=5
+m.insert_at_index(i,8)
+print(m.printList(m.head))
+
+
+new_list=Solution()
+new_list.create_LL()
+print(new_list.printList(new_list.head))
+new_list.remove_at_start()
+print(new_list.printList(new_list.head))
+new_list.remove_at_end()
+print(new_list.printList(new_list.head))
